@@ -111,3 +111,7 @@ category_archive:
 tag_archive:
   type: liquid
   path: /tags/
+
+after_footer_scripts:
+  - https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.js
+  - assets/js/mermaid.js
