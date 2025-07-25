@@ -25,7 +25,7 @@ Yang Group HFNL 服务器集群位于合肥国家实验室，共有`36`个计算
 
 ### 申请流程
 
-![申请流程](/images/申请.svg)
+![申请流程](/images/sign-up.svg)
 
 ---
 
@@ -33,7 +33,7 @@ Yang Group HFNL 服务器集群位于合肥国家实验室，共有`36`个计算
 
 网页注册填写的账号、密码即为SSH登录时的账号、密码。
 
-![登录流程](/images/登录.svg)
+![登录流程](/images/log-in.svg)
 
 ---
 
