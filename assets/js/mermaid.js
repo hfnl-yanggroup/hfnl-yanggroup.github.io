@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var mmSkin = "dark"
+    var mmSkin = "air"
     var mjsTheme = {
       "air": "default",
       "aqua": "default",
