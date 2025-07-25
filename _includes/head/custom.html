@@ -3,8 +3,9 @@
   document.addEventListener("DOMContentLoaded", function() {
     mermaid.initialize({ 
       startOnLoad: true,
-      theme: 'default', // 可选：'dark', 'forest', 'neutral' 等
-      flowchart: { curve: 'basis' } // 调整流程图样式
+      theme: 'default',
+      securityLevel: 'loose' // 允许更多语法
     });
+    window.mermaid.init(); // 强制渲染
   });
 </script>
