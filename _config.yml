@@ -104,6 +104,9 @@ defaults:
       comments: true
       share: true
       related: true
+      toc: true
+      toc_sticky: true  # 目录滚动时固定
+      toc_sidebar: "right"  # 或 "left"
   # _pages
   - scope:
       path: "_pages"
