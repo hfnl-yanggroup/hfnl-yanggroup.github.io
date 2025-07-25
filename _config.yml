@@ -29,7 +29,14 @@ remote_theme: mmistakes/minimal-mistakes
 permalink: /:categories/:title/
 paginate: 5 # amount of posts to show
 paginate_path: /page:num/
-timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+lang: zh-CN
+locale: "zh_CN"
+timezone: "Asia/Shanghai"
+font:
+  text: "Microsoft YaHei, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif"
+date_format: "%Y年%m月%d日"
+paginate_path: "/page:num/"
+paginate_text: "第:num页"
 
 include:
   - _pages

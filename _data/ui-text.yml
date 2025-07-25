@@ -1,0 +1,24 @@
+# _data/ui-text.yml
+zh-CN:
+  meta:
+    date: "发布于"
+    date_label: "发布日期"
+    comments_label: "留下评论"
+    reading_time: "阅读时间"
+    words_per_minute: "字/分钟"
+  navigation:
+    home: "首页"
+    about: "关于"
+    archive: "归档"
+    categories: "分类"
+    tags: "标签"
+  search:
+    placeholder: "搜索..."
+  comments:
+    comments: "评论"
+    no_comments: "暂无评论"
+    share: "分享"
+    reply: "回复"
+  footer:
+    powered_by: "由 %s 驱动"
+    subscribe: "订阅"
