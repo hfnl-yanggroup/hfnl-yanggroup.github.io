@@ -1,5 +1,3 @@
----
----
 $(document).ready(function () {
     var mmSkin = "dark"
     var mjsTheme = {
