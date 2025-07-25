@@ -65,10 +65,10 @@ plugins:
 author:
   name   : "YangGroup@HFNL"
   avatar : "/assets/images/bio-photo.jpg"
-  bio    : "YangGroup@HFNL HPC 集群."
+  bio    : "YangGroup@HFNL HPC 集群"
   links:
     - label: "Hefei, CN"
-      icon: "fas fa-map-marker-alt"
+      icon: "fa-solid fa-location-dot"
     # - label: "Twitter"
     #   icon: "fab fa-fw fa-twitter-square"
     #   url: "https://twitter.com/"
