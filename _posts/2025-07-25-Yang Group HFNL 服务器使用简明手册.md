@@ -1,4 +1,4 @@
-# Yang Group HFNL 服务器使用简明手册 V1.1
+# Yang Group HFNL 服务器使用简明手册 V2.0
 
 `服务器`
 2025-06-17 14:21:22
