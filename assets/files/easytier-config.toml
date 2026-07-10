@@ -1,0 +1,17 @@
+instance_name = "hfnl"
+hostname = "请更改，方便自己识别"
+dhcp = true
+
+[network_identity]
+network_name = "hfnl"
+network_secret = "密码见群聊"
+
+[[peer]]
+uri = "tcp://jump.gleamoe.com:11010"
+
+[[peer]]
+uri = "tcp://ip.727899.xyz:11010"
+
+[flags]
+private_mode = true
+use_smoltcp = true
