@@ -1,0 +1,133 @@
+{% assign announcement = site.data.announcement %}
+{% if announcement.enabled %}
+<style>
+  #site-announcement-modal {
+    position: fixed;
+    z-index: 3000;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  .site-announcement-card {
+    position: relative;
+    width: min(100%, 34rem);
+    padding: 1.75rem 2.25rem 1.75rem 1.75rem;
+    border-radius: 0.75rem;
+    background: var(--card-bg, #fff);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.28);
+    color: var(--text-color, #34343c);
+  }
+
+  .site-announcement-card h2,
+  #site-announcement-sidebar h2 {
+    margin: 0 0 0.75rem;
+    font-size: 1.2rem;
+  }
+
+  .site-announcement-card p,
+  #site-announcement-sidebar p {
+    margin: 0 0 1rem;
+    line-height: 1.65;
+  }
+
+  .site-announcement-close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.65rem;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  #site-announcement-sidebar {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-left: 0.25rem solid var(--link-color, #2f7dde);
+    border-radius: 0.25rem;
+    background: var(--main-bg, #f7f7f7);
+  }
+
+  #site-announcement-sidebar p {
+    font-size: 0.92rem;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var announcement = {
+      id: {{ announcement.id | jsonify }},
+      title: {{ announcement.title | jsonify }},
+      message: {{ announcement.message | jsonify }},
+      linkLabel: {{ announcement.link_label | jsonify }},
+      linkUrl: {{ announcement.link_url | relative_url | jsonify }}
+    };
+    var storageKey = "site-announcement-dismissed:" + announcement.id;
+
+    function announcementContent() {
+      var wrapper = document.createElement("div");
+      var title = document.createElement("h2");
+      var message = document.createElement("p");
+      var link = document.createElement("a");
+      title.textContent = announcement.title;
+      message.textContent = announcement.message;
+      link.href = announcement.linkUrl;
+      link.textContent = announcement.linkLabel;
+      wrapper.append(title, message, link);
+      return wrapper;
+    }
+
+    function showSidebar() {
+      if (document.getElementById("site-announcement-sidebar")) return;
+      var panel = document.getElementById("panel-wrapper");
+      if (!panel) return;
+      var sidebar = document.createElement("section");
+      sidebar.id = "site-announcement-sidebar";
+      sidebar.setAttribute("aria-label", announcement.title);
+      sidebar.append(announcementContent());
+      panel.prepend(sidebar);
+    }
+
+    function dismiss(modal) {
+      localStorage.setItem(storageKey, "true");
+      modal.remove();
+      showSidebar();
+    }
+
+    if (localStorage.getItem(storageKey) === "true") {
+      showSidebar();
+      return;
+    }
+
+    var modal = document.createElement("div");
+    modal.id = "site-announcement-modal";
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    modal.setAttribute("aria-label", announcement.title);
+    var card = document.createElement("div");
+    card.className = "site-announcement-card";
+    var close = document.createElement("button");
+    close.className = "site-announcement-close";
+    close.type = "button";
+    close.setAttribute("aria-label", "关闭公告");
+    close.textContent = "×";
+    card.append(close, announcementContent());
+    modal.append(card);
+    document.body.append(modal);
+    close.focus();
+    close.addEventListener("click", function () { dismiss(modal); });
+    modal.addEventListener("click", function (event) {
+      if (event.target === modal) dismiss(modal);
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && document.body.contains(modal)) dismiss(modal);
+    });
+  });
+</script>
+{% endif %}
