@@ -1,13 +1,21 @@
-instance_name = "hfnl"
 hostname = "请更改，方便自己识别"
+instance_name = "hfnl"
+ipv6_public_addr_auto = true
 dhcp = true
+listeners = []
 
 [network_identity]
 network_name = "hfnl"
-network_secret = "密码见群聊"
+network_secret = "密码见群聊或联系管理员获取"
 
 [[peer]]
 uri = "tcp://jump.gleamoe.com:11010"
 
 [[peer]]
-uri = "tcp://ip.727899.xyz:11010"
+uri = "tcp://aliyun.727899.xyz:11010"
+
+[flags]
+accept_dns = true
+bind_device = false
+enable_kcp_proxy = true
+enable_quic_proxy = true

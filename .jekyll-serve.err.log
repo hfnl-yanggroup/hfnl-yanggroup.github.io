@@ -1,0 +1,15 @@
+[31m  Liquid Exception: Invalid syntax for include tag. File contains invalid characters or sequences: ../assets/files/easytier-config.toml Valid syntax: {% include_relative file.ext param='value' param2='value' %} in C:/Users/USTC/Documents/GitHub/hfnl-yanggroup.github.io/_posts/2026-06-30-easytier组网连接服务器.md[0m
+[33m             Error: Invalid syntax for include tag. File contains invalid characters or sequences: ../assets/files/easytier-config.toml Valid syntax: {% include_relative file.ext param='value' param2='value' %} [0m
+[33m             Error: Run jekyll build --trace for more information.[0m
+[31m  Liquid Exception: Invalid syntax for include tag. File contains invalid characters or sequences: ../assets/files/easytier-config.toml Valid syntax: {% include_relative file.ext param='value' param2='value' %} in C:/Users/USTC/Documents/GitHub/hfnl-yanggroup.github.io/_posts/2026-06-30-easytier组网连接服务器.md[0m
+[33m             Error: Invalid syntax for include tag. File contains invalid characters or sequences: ../assets/files/easytier-config.toml Valid syntax: {% include_relative file.ext param='value' param2='value' %} [0m
+[33m             Error: Run jekyll build --trace for more information.[0m
+[31m  Liquid Exception: Liquid syntax error (line 25): Unknown tag 'toml_file' in C:/Users/USTC/Documents/GitHub/hfnl-yanggroup.github.io/_posts/2026-06-30-easytier组网连接服务器.md[0m
+[33m             Error: Liquid syntax error (line 25): Unknown tag 'toml_file'[0m
+[33m             Error: Run jekyll build --trace for more information.[0m
+[31m  Liquid Exception: Liquid syntax error (line 25): Unknown tag 'toml_file' in C:/Users/USTC/Documents/GitHub/hfnl-yanggroup.github.io/_posts/2026-06-30-easytier组网连接服务器.md[0m
+[33m             Error: Liquid syntax error (line 25): Unknown tag 'toml_file'[0m
+[33m             Error: Run jekyll build --trace for more information.[0m
+[31m  Liquid Exception: Liquid syntax error (line 25): Unknown tag 'toml_file' in C:/Users/USTC/Documents/GitHub/hfnl-yanggroup.github.io/_posts/2026-06-30-easytier组网连接服务器.md[0m
+[33m             Error: Liquid syntax error (line 25): Unknown tag 'toml_file'[0m
+[33m             Error: Run jekyll build --trace for more information.[0m

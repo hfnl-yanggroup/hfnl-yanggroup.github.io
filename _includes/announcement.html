@@ -114,6 +114,13 @@
     font-size: 0.92rem;
   }
 
+  #site-announcement-sidebar .site-announcement-link {
+    gap: 0.3rem;
+    padding: 0.35rem 0.55rem;
+    border-radius: 0.4rem;
+    font-size: 0.8rem;
+  }
+
   .site-announcement-content {
     min-height: var(--site-announcement-content-height, 0);
   }
@@ -182,11 +189,11 @@
       });
       message.append(document.createTextNode(messageText.slice(cursor)));
       wrapper.append(kicker, title, message);
-      if (announcement.linkLabel && announcement.linkUrl) {
+      if (announcement.link_label && announcement.link_url) {
         var link = document.createElement("a");
         link.className = "site-announcement-link";
-        link.href = announcement.linkUrl;
-        link.textContent = announcement.linkLabel;
+        link.href = announcement.link_url;
+        link.textContent = announcement.link_label;
         wrapper.append(link);
       }
       return wrapper;
