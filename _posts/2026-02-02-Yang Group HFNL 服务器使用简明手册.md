@@ -29,7 +29,7 @@ tags:
 
 ### 申请流程
 
-![申请流程](/assets/images/sign-up.svg)
+![申请流程](/assets/images/sign-up.svg){: w="1016" h="177" }
 
 ---
 
@@ -37,7 +37,7 @@ tags:
 
 网页注册填写的账号、密码即为SSH登录时的账号、密码。
 
-![登录流程](/assets/images/log-in.svg)
+![登录流程](/assets/images/log-in.svg){: w="1184" h="231" }
 
 ---
 

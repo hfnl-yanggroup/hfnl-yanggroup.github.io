@@ -24,6 +24,21 @@ comments:
 
 paginate: 10
 
+plugins:
+  - jekyll-archives
+
+# Generate the pages targeted by Chirpy's category and tag links.
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+  layouts:
+    category: category
+    tag: tag
+  permalinks:
+    category: /categories/:name/
+    tag: /tags/:name/
+
 pwa:
   enabled: true
   cache:

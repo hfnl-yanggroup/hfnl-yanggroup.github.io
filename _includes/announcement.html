@@ -107,34 +107,34 @@
     font-size: 0.92rem;
   }
 
+  .site-announcement-content {
+    min-height: var(--site-announcement-content-height, 0);
+  }
+
   .site-announcement-tabs {
     display: flex;
-    gap: 0.35rem;
-    margin: 0 0 0.85rem;
-    overflow-x: auto;
+    justify-content: center;
+    gap: 0.55rem;
+    margin: 1rem 0 0;
   }
 
   .site-announcement-tab {
-    flex: 0 0 auto;
-    max-width: 100%;
-    padding: 0.3rem 0.55rem;
-    border: 1px solid transparent;
+    width: 0.55rem;
+    height: 0.55rem;
+    padding: 0;
+    border: 0;
     border-radius: 999px;
-    background: transparent;
-    color: var(--text-muted-color, #6c757d);
-    font-size: 0.78rem;
-    line-height: 1.2;
+    background: var(--text-muted-color, #6c757d);
+    opacity: 0.42;
     cursor: pointer;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    transition: opacity 0.15s ease, transform 0.15s ease;
   }
 
   .site-announcement-tab:hover,
   .site-announcement-tab.is-active {
-    border-color: color-mix(in srgb, var(--link-color, #2f7dde) 30%, transparent);
-    background: color-mix(in srgb, var(--link-color, #2f7dde) 12%, transparent);
-    color: var(--link-color, #2f7dde);
+    background: var(--link-color, #2f7dde);
+    opacity: 1;
+    transform: scale(1.2);
   }
 </style>
 
@@ -181,7 +181,28 @@
       tabs.className = "site-announcement-tabs";
       tabs.setAttribute("role", "tablist");
       var content = document.createElement("div");
+      content.className = "site-announcement-content";
       var tabButtons = [];
+
+      function stabilizeContentHeight() {
+        var contentWidth = content.getBoundingClientRect().width;
+        if (!contentWidth) return;
+
+        var measure = document.createElement("div");
+        measure.style.position = "absolute";
+        measure.style.visibility = "hidden";
+        measure.style.pointerEvents = "none";
+        measure.style.width = contentWidth + "px";
+        sidebar.append(measure);
+
+        var maxHeight = 0;
+        announcements.forEach(function (item) {
+          measure.replaceChildren(announcementContent(item));
+          maxHeight = Math.max(maxHeight, measure.getBoundingClientRect().height);
+        });
+        measure.remove();
+        content.style.setProperty("--site-announcement-content-height", Math.ceil(maxHeight) + "px");
+      }
 
       function selectAnnouncement(item, button) {
         content.replaceChildren(announcementContent(item));
@@ -196,15 +217,21 @@
         tab.className = "site-announcement-tab";
         tab.type = "button";
         tab.setAttribute("role", "tab");
-        tab.textContent = item.title;
+        tab.setAttribute("aria-label", "查看公告：" + item.title);
+        tab.title = item.title;
         tab.addEventListener("click", function () { selectAnnouncement(item, tab); });
         tabs.append(tab);
         tabButtons.push(tab);
         if (index === 0) selectAnnouncement(item, tab);
       });
 
-      sidebar.append(tabs, content);
+      sidebar.append(content, tabs);
       panel.prepend(sidebar);
+      requestAnimationFrame(stabilizeContentHeight);
+      window.addEventListener("resize", stabilizeContentHeight);
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(stabilizeContentHeight);
+      }
     }
 
     function dismiss(modal, announcement) {

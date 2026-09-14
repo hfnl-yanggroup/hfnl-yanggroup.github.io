@@ -3,6 +3,10 @@ _site
 .jekyll-metadata
 Gemfile.lock
 
+# Local preview and dependency-install logs.
+.jekyll-serve*.log
+.bundle-install*.log
+
 # Local pre-migration snapshots and build dependencies.
 .backup/
 .bundle/
