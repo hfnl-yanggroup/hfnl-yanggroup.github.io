@@ -212,11 +212,10 @@
       showSidebar();
     }
 
-    var nextAnnouncement = announcements.find(function (item) {
-      return localStorage.getItem(storageKey(item)) !== "true";
-    });
+    // 只检查最新公告，避免从文章回到首页时弹出旧公告。
+    var nextAnnouncement = announcements[0];
 
-    if (!nextAnnouncement) {
+    if (!nextAnnouncement || localStorage.getItem(storageKey(nextAnnouncement)) === "true") {
       showSidebar();
       return;
     }
