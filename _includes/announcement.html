@@ -1,5 +1,4 @@
-{% assign announcement = site.data.announcement %}
-{% if announcement.enabled %}
+{% if site.data.announcement.announcements.size > 0 %}
 <style>
   #site-announcement-modal {
     position: fixed;
@@ -107,33 +106,66 @@
   #site-announcement-sidebar p {
     font-size: 0.92rem;
   }
+
+  .site-announcement-tabs {
+    display: flex;
+    gap: 0.35rem;
+    margin: 0 0 0.85rem;
+    overflow-x: auto;
+  }
+
+  .site-announcement-tab {
+    flex: 0 0 auto;
+    max-width: 100%;
+    padding: 0.3rem 0.55rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-muted-color, #6c757d);
+    font-size: 0.78rem;
+    line-height: 1.2;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .site-announcement-tab:hover,
+  .site-announcement-tab.is-active {
+    border-color: color-mix(in srgb, var(--link-color, #2f7dde) 30%, transparent);
+    background: color-mix(in srgb, var(--link-color, #2f7dde) 12%, transparent);
+    color: var(--link-color, #2f7dde);
+  }
 </style>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    var announcement = {
-      id: {{ announcement.id | jsonify }},
-      title: {{ announcement.title | jsonify }},
-      message: {{ announcement.message | jsonify }},
-      linkLabel: {{ announcement.link_label | jsonify }},
-      linkUrl: {{ announcement.link_url | relative_url | jsonify }}
-    };
-    var storageKey = "site-announcement-dismissed:" + announcement.id;
+    var announcements = {{ site.data.announcement.announcements | jsonify }}.filter(function (item) {
+      return item.enabled !== false;
+    });
+    if (!announcements.length) return;
 
-    function announcementContent() {
+    function storageKey(item) {
+      return "site-announcement-dismissed:" + item.id;
+    }
+
+    function announcementContent(announcement) {
       var wrapper = document.createElement("div");
       var kicker = document.createElement("div");
       var title = document.createElement("h2");
       var message = document.createElement("p");
-      var link = document.createElement("a");
       kicker.className = "site-announcement-kicker";
       kicker.textContent = "公告";
       title.textContent = announcement.title;
       message.textContent = announcement.message;
-      link.className = "site-announcement-link";
-      link.href = announcement.linkUrl;
-      link.textContent = announcement.linkLabel;
-      wrapper.append(kicker, title, message, link);
+      wrapper.append(kicker, title, message);
+      if (announcement.linkLabel && announcement.linkUrl) {
+        var link = document.createElement("a");
+        link.className = "site-announcement-link";
+        link.href = announcement.linkUrl;
+        link.textContent = announcement.linkLabel;
+        wrapper.append(link);
+      }
       return wrapper;
     }
 
@@ -143,18 +175,48 @@
       if (!panel) return;
       var sidebar = document.createElement("section");
       sidebar.id = "site-announcement-sidebar";
-      sidebar.setAttribute("aria-label", announcement.title);
-      sidebar.append(announcementContent());
+      sidebar.setAttribute("aria-label", "公告");
+      var tabs = document.createElement("div");
+      tabs.className = "site-announcement-tabs";
+      tabs.setAttribute("role", "tablist");
+      var content = document.createElement("div");
+      var tabButtons = [];
+
+      function selectAnnouncement(item, button) {
+        content.replaceChildren(announcementContent(item));
+        tabButtons.forEach(function (tab) {
+          tab.classList.toggle("is-active", tab === button);
+          tab.setAttribute("aria-selected", tab === button ? "true" : "false");
+        });
+      }
+
+      announcements.forEach(function (item, index) {
+        var tab = document.createElement("button");
+        tab.className = "site-announcement-tab";
+        tab.type = "button";
+        tab.setAttribute("role", "tab");
+        tab.textContent = item.title;
+        tab.addEventListener("click", function () { selectAnnouncement(item, tab); });
+        tabs.append(tab);
+        tabButtons.push(tab);
+        if (index === 0) selectAnnouncement(item, tab);
+      });
+
+      sidebar.append(tabs, content);
       panel.prepend(sidebar);
     }
 
-    function dismiss(modal) {
-      localStorage.setItem(storageKey, "true");
+    function dismiss(modal, announcement) {
+      localStorage.setItem(storageKey(announcement), "true");
       modal.remove();
       showSidebar();
     }
 
-    if (localStorage.getItem(storageKey) === "true") {
+    var nextAnnouncement = announcements.find(function (item) {
+      return localStorage.getItem(storageKey(item)) !== "true";
+    });
+
+    if (!nextAnnouncement) {
       showSidebar();
       return;
     }
@@ -163,7 +225,7 @@
     modal.id = "site-announcement-modal";
     modal.setAttribute("role", "dialog");
     modal.setAttribute("aria-modal", "true");
-    modal.setAttribute("aria-label", announcement.title);
+    modal.setAttribute("aria-label", nextAnnouncement.title);
     var card = document.createElement("div");
     card.className = "site-announcement-card";
     var close = document.createElement("button");
@@ -171,16 +233,16 @@
     close.type = "button";
     close.setAttribute("aria-label", "关闭公告");
     close.textContent = "×";
-    card.append(close, announcementContent());
+    card.append(close, announcementContent(nextAnnouncement));
     modal.append(card);
     document.body.append(modal);
     close.focus();
-    close.addEventListener("click", function () { dismiss(modal); });
+    close.addEventListener("click", function () { dismiss(modal, nextAnnouncement); });
     modal.addEventListener("click", function (event) {
-      if (event.target === modal) dismiss(modal);
+      if (event.target === modal) dismiss(modal, nextAnnouncement);
     });
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && document.body.contains(modal)) dismiss(modal);
+      if (event.key === "Escape" && document.body.contains(modal)) dismiss(modal, nextAnnouncement);
     });
   });
 </script>

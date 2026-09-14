@@ -1,7 +1,19 @@
-# 修改 id 后，已关闭过旧公告的访客会再次看到首页弹窗。
-enabled: true
-id: "2026-09-hfnl-welcome"
-title: "使用提示"
-message: "欢迎使用 YangGroup@HFNL HPC 集群使用文档。开始前请先阅读服务器使用简明手册。"
-link_label: "阅读简明手册"
-link_url: "/blog/Yang-Group-HFNL-%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%89%8B%E5%86%8C/"
+# 每条公告都有独立 id。修改 id 会让关闭过旧公告的访客再次看到弹窗。
+announcements:
+  - id: "2026-09-jump-host-temporary"
+    title: "跳板机临时访问策略"
+    message: "由于科大校园网防火墙设置，原跳板机暂时失效。请临时将 jump.gleamoe.com 替换为 47.111.64.127：账号申请入口为 47.111.64.127:8005，SSH 连接地址为 47.111.64.127:7001。该策略为临时方案，不保证稳定性与访问速率，请及时备份数据。"
+
+  - id: "2026-09-hfnl-welcome"
+    title: "使用提示"
+    message: "欢迎使用 YangGroup@HFNL HPC 集群使用文档。开始前请先阅读服务器使用简明手册。"
+    link_label: "阅读简明手册"
+    link_url: "/blog/Yang-Group-HFNL-%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%89%8B%E5%86%8C/"
+
+  # 添加新公告时复制下列结构；enabled: false 可暂时隐藏一条公告。
+  # - id: "2026-10-example"
+  #   title: "新公告标题"
+  #   message: "公告正文。"
+  #   link_label: "查看详情" # 可选；未填写则只显示公告正文
+  #   link_url: "/about/"
+  #   enabled: false
