@@ -2,3 +2,9 @@ _site
 .sass-cache
 .jekyll-metadata
 Gemfile.lock
+
+# Local pre-migration snapshots and build dependencies.
+.backup/
+.bundle/
+vendor/
+.jekyll-cache/
