@@ -35,6 +35,13 @@
     line-height: 1.65;
   }
 
+  .site-announcement-message-link {
+    color: var(--link-color, #2f7dde);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
   .site-announcement-close {
     position: absolute;
     top: 0.8rem;
@@ -158,7 +165,22 @@
       kicker.className = "site-announcement-kicker";
       kicker.textContent = "公告";
       title.textContent = announcement.title;
-      message.textContent = announcement.message;
+      var messageText = announcement.message || "";
+      var cursor = 0;
+      (announcement.message_links || []).forEach(function (item) {
+        var match = item && item.text ? messageText.indexOf(item.text, cursor) : -1;
+        if (match < 0 || !item.url) return;
+        message.append(document.createTextNode(messageText.slice(cursor, match)));
+        var inlineLink = document.createElement("a");
+        inlineLink.className = "site-announcement-message-link";
+        inlineLink.href = item.url;
+        inlineLink.target = "_blank";
+        inlineLink.rel = "noopener noreferrer";
+        inlineLink.textContent = item.text;
+        message.append(inlineLink);
+        cursor = match + item.text.length;
+      });
+      message.append(document.createTextNode(messageText.slice(cursor)));
       wrapper.append(kicker, title, message);
       if (announcement.linkLabel && announcement.linkUrl) {
         var link = document.createElement("a");

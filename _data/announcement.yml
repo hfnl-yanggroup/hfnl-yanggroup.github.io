@@ -3,7 +3,10 @@
 announcements:
   - id: "2026-09-jump-host-temporary"
     title: "跳板机临时访问策略"
-    message: "由于科大校园网防火墙设置，原跳板机暂时失效。请临时将 jump.gleamoe.com 替换为 47.111.64.127：账号申请入口为 47.111.64.127:8005，SSH 连接地址为 47.111.64.127:7001。该策略为临时方案，不保证稳定性与访问速率，请及时备份数据。"
+    message: "由于科大校园网防火墙设置，原跳板机暂时失效。请临时将 jump.gleamoe.com 替换为 47.111.64.127。即账号申请入口为 47.111.64.127:8005，SSH 连接地址为 47.111.64.127:7001。该策略为临时方案，不保证稳定性与访问速率，请及时备份数据。"
+    message_links:
+      - text: "47.111.64.127:8005"
+        url: "http://47.111.64.127:8005"
 
   - id: "2026-09-hfnl-welcome"
     title: "使用提示"
@@ -15,6 +18,9 @@ announcements:
   # - id: "2026-10-example"
   #   title: "新公告标题"
   #   message: "公告正文。"
+  #   message_links: # 可选；将正文中的指定文字设为新窗口链接
+  #     - text: "链接文字"
+  #       url: "https://example.com"
   #   link_label: "查看详情" # 可选；未填写则只显示公告正文
   #   link_url: "/about/"
   #   enabled: false
