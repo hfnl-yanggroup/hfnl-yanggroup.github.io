@@ -139,7 +139,8 @@
 </style>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  function initAnnouncement() {
+    if (document.getElementById("site-announcement-modal") || document.getElementById("site-announcement-sidebar")) return;
     var announcements = {{ site.data.announcement.announcements | jsonify }}.filter(function (item) {
       return item.enabled !== false;
     });
@@ -243,6 +244,16 @@
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape" && document.body.contains(modal)) dismiss(modal, nextAnnouncement);
     });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAnnouncement, { once: true });
+  } else {
+    initAnnouncement();
+  }
+
+  window.addEventListener("pageshow", function () {
+    initAnnouncement();
   });
 </script>
 {% endif %}
