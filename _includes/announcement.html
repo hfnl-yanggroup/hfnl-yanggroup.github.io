@@ -213,7 +213,7 @@
       showSidebar();
     }
 
-    // 只检查最新公告，避免从文章回到首页时弹出旧公告。
+    /* 只检查最新公告，避免从文章回到首页时弹出旧公告。 */
     var nextAnnouncement = announcements[0];
 
     if (!nextAnnouncement || localStorage.getItem(storageKey(nextAnnouncement)) === "true") {
