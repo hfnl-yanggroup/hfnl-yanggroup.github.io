@@ -1,5 +1,6 @@
 ---
 title: "Yang Group HFNL 服务器使用简明手册"
+pin: true
 toc: true
 toc_label: "文章目录"  # 自定义目录标题
 toc_icon: "list-ul"   # 可选：使用Font Awesome图标
