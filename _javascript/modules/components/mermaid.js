@@ -3,7 +3,26 @@
  */
 
 const MERMAID = 'mermaid';
+const FONT_READY_TIMEOUT = 2500;
 const themeMap = Theme.newThemeMap('default', 'dark');
+
+function waitForFonts() {
+  if (!document.fonts || !document.fonts.ready) {
+    return Promise.resolve();
+  }
+
+  return Promise.race([
+    document.fonts.ready,
+    new Promise((resolve) => setTimeout(resolve, FONT_READY_TIMEOUT))
+  ]);
+}
+
+async function renderMermaid() {
+  await waitForFonts();
+  await mermaid.run({
+    nodes: document.querySelectorAll(`.${MERMAID}`)
+  });
+}
 
 function refreshTheme(event) {
   if (
@@ -22,8 +41,8 @@ function refreshTheme(event) {
 
     const newTheme = themeMap[Theme.resolvedTheme];
 
-    mermaid.initialize({ theme: newTheme });
-    mermaid.init(null, `.${MERMAID}`);
+    mermaid.initialize({ theme: newTheme, startOnLoad: false });
+    void renderMermaid();
   }
 }
 
@@ -49,14 +68,16 @@ export function loadMermaid() {
 
   const initTheme = themeMap[Theme.resolvedTheme];
 
-  let mermaidConf = {
-    theme: initTheme
+  const mermaidConf = {
+    theme: initTheme,
+    startOnLoad: false
   };
 
   const basicList = document.getElementsByClassName('language-mermaid');
   [...basicList].forEach(setNode);
 
   mermaid.initialize(mermaidConf);
+  void renderMermaid();
 
   if (Theme.isToggleable) {
     window.addEventListener('message', refreshTheme);
