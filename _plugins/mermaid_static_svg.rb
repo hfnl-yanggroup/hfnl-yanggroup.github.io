@@ -27,6 +27,7 @@ module MermaidStaticSvg
     FileUtils.mkdir_p(File.dirname(output))
 
     executable = File.join(site.source, 'node_modules', '.bin', Gem.win_platform? ? 'mmdc.cmd' : 'mmdc')
+    puppeteer_config = File.join(site.source, 'puppeteer-config.json')
     unless File.exist?(executable)
       raise Jekyll::Errors::FatalException, 'Mermaid CLI is missing. Run npm install before building the site.'
     end
@@ -34,7 +35,9 @@ module MermaidStaticSvg
     Tempfile.create(['mermaid-', '.mmd']) do |source|
       source.write(definition)
       source.flush
-      _stdout, stderr, status = Open3.capture3(executable, '-i', source.path, '-o', output, '-b', 'transparent')
+      command = [executable, '-i', source.path, '-o', output, '-b', 'transparent']
+      command += ['-p', puppeteer_config] if File.exist?(puppeteer_config)
+      _stdout, stderr, status = Open3.capture3(*command)
       return if status.success?
 
       raise Jekyll::Errors::FatalException, "Mermaid diagram #{id} could not be rendered: #{stderr}"
