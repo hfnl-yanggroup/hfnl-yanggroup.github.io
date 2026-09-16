@@ -5,6 +5,7 @@ toc: true
 toc_label: "文章目录"  # 自定义目录标题
 toc_icon: "list-ul"   # 可选：使用Font Awesome图标
 lang: zh-CN
+mermaid: true
 categories:
   - Blog
 tags:
@@ -30,8 +31,6 @@ tags:
 ### 申请流程
 
 ```mermaid
-%% id: sign-up
-%% alt: 申请流程
 flowchart LR
   A[符合申请条件] --> B{确认网络环境}
   B -->|合肥国家实验室内网| C[浏览器访问 172.16.39.95:6080]
@@ -47,8 +46,6 @@ flowchart LR
 网页注册填写的账号、密码即为SSH登录时的账号、密码。
 
 ```mermaid
-%% id: log-in
-%% alt: 登录流程
 flowchart LR
   A[已申请账号并通过] --> B{确认网络环境}
   B -->|合肥国家实验室内网| C[Xshell IP 改为 172.16.39.95<br/>端口改为 1688]
