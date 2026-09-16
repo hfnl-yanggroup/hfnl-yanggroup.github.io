@@ -31,11 +31,11 @@ tags:
 ### 申请流程
 
 ```mermaid
-flowchart LR
+flowchart TD
   A[符合申请条件] --> B{确认网络环境}
-  B -->|合肥国家实验室内网| C[浏览器访问 172.16.39.95:6080]
-  B -->|科大等外网| D[浏览器访问 jump.gleamoe.com:8005]
-  C --> E[页面提交注册，等待管理员审批并邮件通知]
+  B -->|合肥国家实验室内网| C[浏览器访问<br/>172.16.39.95:6080]
+  B -->|科大等外网| D[浏览器访问<br/>jump.gleamoe.com:8005]
+  C --> E[页面提交注册<br/>等待管理员审批并邮件通知]
   D --> E
 ```
 
@@ -46,10 +46,10 @@ flowchart LR
 网页注册填写的账号、密码即为SSH登录时的账号、密码。
 
 ```mermaid
-flowchart LR
+flowchart TD
   A[已申请账号并通过] --> B{确认网络环境}
-  B -->|合肥国家实验室内网| C[Xshell IP 改为 172.16.39.95<br/>端口改为 1688]
-  B -->|科大等外网| D[Xshell IP 改为 jump.gleamoe.com<br/>端口改为 7001]
+  B -->|合肥国家实验室内网| C[Xshell<br/>IP 改为 172.16.39.95<br/>端口改为 1688]
+  B -->|科大等外网| D[Xshell<br/>IP 改为 jump.gleamoe.com<br/>端口改为 7001]
   C --> E[正常使用]
   D --> E
 ```
