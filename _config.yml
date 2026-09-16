@@ -11,6 +11,9 @@ description: >-
 url: "https://hfnl-yanggroup.github.io"
 baseurl: ""
 
+github:
+  username: hfnl-yanggroup
+
 social:
   name: YangGroup@HFNL
   links: []
@@ -18,6 +21,12 @@ social:
 avatar: /assets/images/ustc_logo.svg
 theme_mode:
 toc: true
+
+actions:
+  edit_post:
+    enabled: true
+    url: "https://github.com/hfnl-yanggroup/hfnl-yanggroup.github.io/edit/main"
+    static_url: false
 
 comments:
   provider:

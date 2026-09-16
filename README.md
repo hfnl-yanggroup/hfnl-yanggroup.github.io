@@ -1,27 +1,26 @@
-# Minimal Mistakes remote theme starter
+# YangGroup@HFNL HPC 集群使用文档
 
-Click [**Use this template**](https://github.com/mmistakes/mm-github-pages-starter/generate) button above for the quickest method of getting started with the [Minimal Mistakes Jekyll theme](https://github.com/mmistakes/minimal-mistakes).
+本仓库是 YangGroup@HFNL 的服务器与集群使用说明站点，基于
+[Jekyll](https://jekyllrb.com/) 和 [Chirpy 7.6.0](https://github.com/cotes2020/jekyll-theme-chirpy) 构建。
 
-Contains basic configuration to get you a site with:
+## 内容维护
 
-- Sample posts.
-- Sample top navigation.
-- Sample author sidebar with social links.
-- Sample footer links.
-- Paginated home page.
-- Archive pages for posts grouped by year, category, and tag.
-- Sample about page.
-- Sample 404 page.
-- Site wide search.
+- 在 `_posts/` 新建 Markdown 文件发布说明；文件名使用 `YYYY-MM-DD-标题.md`。
+- 在 `_data/announcement.yml` 维护首页公告，最新公告放在第一项。
+- 静态图片、下载文件分别置于 `assets/images/`、`assets/files/`。
+- 站点的标题、链接、头像和功能开关在 `_config.yml` 中配置。
 
-Replace sample content with your own and [configure as necessary](https://mmistakes.github.io/minimal-mistakes/docs/configuration/).
+## 本地预览
 
----
+安装 Ruby 与 Bundler 后，在仓库根目录运行：
 
-## Troubleshooting
+```powershell
+bundle install
+bundle exec jekyll serve
+```
 
-If you have a question about using Jekyll, start a discussion on the [Jekyll Forum](https://talk.jekyllrb.com/) or [StackOverflow](https://stackoverflow.com/questions/tagged/jekyll). Other resources:
+浏览器访问 <http://127.0.0.1:4000/>。提交到 `main` 或 `master` 分支后，GitHub Actions 会构建并发布 GitHub Pages。
 
-- [Ruby 101](https://jekyllrb.com/docs/ruby-101/)
-- [Setting up a Jekyll site with GitHub Pages](https://jekyllrb.com/docs/github-pages/)
-- [Configuring GitHub Metadata](https://github.com/jekyll/github-metadata/blob/master/docs/configuration.md#configuration) to work properly when developing locally and avoid `No GitHub API authentication could be found. Some fields may be missing or have incorrect data.` warnings.
+## 主题来源
+
+主题源码已随仓库保留，便于维护本地布局、样式和脚本；运行时仍固定使用 `jekyll-theme-chirpy ~> 7.6`。Chirpy 以 MIT License 发布。
