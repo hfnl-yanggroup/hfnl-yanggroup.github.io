@@ -29,7 +29,16 @@ tags:
 
 ### 申请流程
 
-<a href="/assets/images/sign-up.svg" target="_blank" rel="noopener" title="在新标签打开 SVG 原图，可选择并复制流程文字"><img src="/assets/images/sign-up.svg" alt="申请流程" width="1016" height="177"></a>
+```mermaid
+%% id: sign-up
+%% alt: 申请流程
+flowchart LR
+  A[符合申请条件] --> B{确认网络环境}
+  B -->|合肥国家实验室内网| C[浏览器访问 172.16.39.95:6080]
+  B -->|科大等外网| D[浏览器访问 jump.gleamoe.com:8005]
+  C --> E[页面提交注册，等待管理员审批并邮件通知]
+  D --> E
+```
 
 ---
 
@@ -37,7 +46,16 @@ tags:
 
 网页注册填写的账号、密码即为SSH登录时的账号、密码。
 
-<a href="/assets/images/log-in.svg" target="_blank" rel="noopener" title="在新标签打开 SVG 原图，可选择并复制流程文字"><img src="/assets/images/log-in.svg" alt="登录流程" width="1184" height="231"></a>
+```mermaid
+%% id: log-in
+%% alt: 登录流程
+flowchart LR
+  A[已申请账号并通过] --> B{确认网络环境}
+  B -->|合肥国家实验室内网| C[Xshell IP 改为 172.16.39.95<br/>端口改为 1688]
+  B -->|科大等外网| D[Xshell IP 改为 jump.gleamoe.com<br/>端口改为 7001]
+  C --> E[正常使用]
+  D --> E
+```
 
 ---
 

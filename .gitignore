@@ -12,3 +12,6 @@ Gemfile.lock
 .bundle/
 vendor/
 .jekyll-cache/
+.mermaid-npm-cache/
+node_modules/
+.mermaid-npm-cache/
