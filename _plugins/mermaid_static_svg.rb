@@ -35,7 +35,10 @@ module MermaidStaticSvg
     Tempfile.create(['mermaid-', '.mmd']) do |source|
       source.write(definition)
       source.flush
-      command = [executable, '-i', source.path, '-o', output, '-b', 'transparent']
+      # A fixed SVG canvas gives the image an intrinsic size. Chirpy's lazy
+      # image container otherwise cannot reliably size Mermaid's default
+      # width="100%" SVG before it has loaded.
+      command = [executable, '-i', source.path, '-o', output, '-b', 'transparent', '-w', '1200']
       command += ['-p', puppeteer_config] if File.exist?(puppeteer_config)
       _stdout, stderr, status = Open3.capture3(*command)
       return if status.success?
@@ -67,7 +70,7 @@ module MermaidStaticSvg
     render(document, id, diagram)
     alt ||= id.tr('-', ' ')
     path = "{{ site.baseurl }}/assets/images/#{id}.svg"
-    %(<a href="#{path}" target="_blank" rel="noopener" title="在新标签打开 SVG 原图，可选择并复制流程文字"><img src="#{path}" alt="#{alt}" loading="lazy"></a>)
+    %(<a href="#{path}" target="_blank" rel="noopener" title="在新标签打开 SVG 原图，可选择并复制流程文字" style="display: block; width: 100%;"><img src="#{path}" alt="#{alt}" loading="lazy" style="display: block; width: 100%; height: auto;"></a>)
   end
 end
 
